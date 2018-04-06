@@ -24,7 +24,6 @@ class ParserData {
             
         for album in albums{
             
-            //test commit
             guard let albumFinal = album as? [String : Any] else{return albumDictionary}
                 
             let temp = FullAlbum(_nameAlbum: albumFinal["collectionName"]! as! String,
