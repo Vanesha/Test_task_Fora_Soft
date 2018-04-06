@@ -23,6 +23,8 @@ class ParserData {
         guard let albums = json["results"] as? NSArray else{return albumDictionary}
             
         for album in albums{
+            
+            //test commit
             guard let albumFinal = album as? [String : Any] else{return albumDictionary}
                 
             let temp = FullAlbum(_nameAlbum: albumFinal["collectionName"]! as! String,
