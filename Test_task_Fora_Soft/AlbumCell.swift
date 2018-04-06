@@ -24,6 +24,7 @@ class AlbumCell: UICollectionViewCell {
         }
         task.resume()
         albumTextLabel.text = name
+        //test commit
         
     }
     
