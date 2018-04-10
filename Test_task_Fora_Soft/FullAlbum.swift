@@ -12,7 +12,7 @@ class FullAlbum{
     var nameAlbum: String = ""
     var imageAlbum: String = ""
     var artistName: String = ""
-    var copyright: String = ""
+    var copyright: String? = ""
     var currency: String = ""
     var releaseDate: String = ""
     var genreAlbum: String = ""
@@ -20,7 +20,7 @@ class FullAlbum{
     var trackCount: Int = 0
     
     
-    init(_nameAlbum: String, _imageAlbum: String, _artistName : String, _copyright : String, _currency : String, _releaseDate : String, _genreAlbum : String, _albumPrice : Float, _trackCount : Int) {
+    init(_nameAlbum: String, _imageAlbum: String, _artistName : String, _copyright : String?, _currency : String, _releaseDate : String, _genreAlbum : String, _albumPrice : Float, _trackCount : Int) {
         nameAlbum = _nameAlbum
         imageAlbum = _imageAlbum
         artistName = _artistName
@@ -31,5 +31,6 @@ class FullAlbum{
         albumPrice = _albumPrice
         trackCount = _trackCount
     }
-}
+    
+    }
 

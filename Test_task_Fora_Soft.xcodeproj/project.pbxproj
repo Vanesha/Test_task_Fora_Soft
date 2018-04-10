@@ -43,6 +43,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		77354BDD2077B2E500FA8146 /* Album class */ = {
+			isa = PBXGroup;
+			children = (
+				77354BDB2076AB5700FA8146 /* FullAlbum.swift */,
+			);
+			name = "Album class";
+			sourceTree = "<group>";
+		};
+		77354BDF2077B31900FA8146 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				7793B0472072299A006B83E5 /* ViewController.swift */,
+				77354BB920767CDE00FA8146 /* AlbumViewC.swift */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
 		7793B0392072299A006B83E5 = {
 			isa = PBXGroup;
 			children = (
@@ -62,14 +79,13 @@
 		7793B0442072299A006B83E5 /* Test_task_Fora_Soft */ = {
 			isa = PBXGroup;
 			children = (
-				77354BDB2076AB5700FA8146 /* FullAlbum.swift */,
+				77354BDD2077B2E500FA8146 /* Album class */,
+				77354BDF2077B31900FA8146 /* VC */,
 				7793B0452072299A006B83E5 /* AppDelegate.swift */,
 				771C68CD2073CB9B008B1EFD /* AlbumCell.swift */,
-				7793B04C2072299A006B83E5 /* Assets.xcassets */,
 				771C68D120741147008B1EFD /* ParserData.swift */,
+				7793B04C2072299A006B83E5 /* Assets.xcassets */,
 				7793B04E2072299A006B83E5 /* LaunchScreen.storyboard */,
-				7793B0472072299A006B83E5 /* ViewController.swift */,
-				77354BB920767CDE00FA8146 /* AlbumViewC.swift */,
 				7793B0492072299A006B83E5 /* Main.storyboard */,
 				7793B0512072299A006B83E5 /* Info.plist */,
 			);

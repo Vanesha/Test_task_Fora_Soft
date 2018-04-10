@@ -15,29 +15,41 @@ class ParserData {
     
     
     func getAlbumsFromItunes(data: Data?) -> [FullAlbum]{
-        var albumDictionary = [FullAlbum]()
-        guard let dataPage = data else{return albumDictionary}
+        var sorted = [FullAlbum]()
+        
+        guard let dataPage = data else{
+            print("data")
+            return sorted}
             
-        guard let json = try? JSONSerialization.jsonObject(with: dataPage, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject else{return albumDictionary}
+        guard let json = try? JSONSerialization.jsonObject(with: dataPage, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject else{
+            print("json")
+            return sorted}
             
-        guard let albums = json["results"] as? NSArray else{return albumDictionary}
+        guard let albums = json["results"] as? NSArray else{return sorted}
+        
+        if albums.count == 0 {
+            return sorted
+        }
             
-        for album in albums{
+        else{
+            for album in albums{
             
-            guard let albumFinal = album as? [String : Any] else{return albumDictionary}
+                guard let albumFinal = album as? [String : Any] else{return sorted}
                 
-            let temp = FullAlbum(_nameAlbum: albumFinal["collectionName"]! as! String,
+                let temp = FullAlbum(_nameAlbum: albumFinal["collectionName"]! as! String,
                                  _imageAlbum: albumFinal["artworkUrl100"]! as! String,
                                  _artistName: albumFinal["artistName"] as! String,
-                                 _copyright: albumFinal["copyright"] as! String,
+                                 _copyright: albumFinal["copyright"] as? String,
                                  _currency: albumFinal["currency"] as! String,
                                  _releaseDate: albumFinal["releaseDate"] as! String,
                                  _genreAlbum:albumFinal["primaryGenreName"] as! String,
                                  _albumPrice: albumFinal["collectionPrice"] as! Float,
                                  _trackCount: albumFinal["trackCount"] as! Int)
-            albumDictionary.append(temp)
+            
+                sorted.append(temp)
+            }
+            sorted = sorted.sorted{ $0.nameAlbum < $1.nameAlbum }
         }
-        let sorted = albumDictionary.sorted{ $0.nameAlbum < $1.nameAlbum }
         return sorted
     }
     

@@ -41,16 +41,25 @@ extension ViewController: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        let searchText = searchBar.text?.lowercased().addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let seachText = transformString(str: searchBar.text!)
         
-        if searchBar.text != "" {
-            let url = URL(string: "https://itunes.apple.com/search?term=\(searchText!.replacingOccurrences(of: " ", with: "+"))&entity=album")
-            let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, _, _) in
-                self.albums = ParserData.instance.getAlbumsFromItunes(data: data)
-                self.collectionView.reloadData()
-            })
-            task.resume()
-        }
+        let url = URL(string: "https://itunes.apple.com/search?term=\(seachText)&entity=album")
+        let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, _, _) in
+            self.albums = ParserData.instance.getAlbumsFromItunes(data: data)
+            if self.albums.count == 0 {
+                let alertVC = UIAlertController(title: "Повторите запрос", message: "Ничего не найдено", preferredStyle: .alert)
+                let actionOK = UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                        
+                })
+                alertVC.addAction(actionOK)
+                self.present(alertVC, animated: true, completion: {
+                    print("")
+                })
+            }
+            self.collectionView.reloadData()
+                
+        })
+        task.resume()
         searchBar.resignFirstResponder()
     }
     
@@ -76,6 +85,34 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     
 }
+
+func transformString(str: String) -> String{
+    
+    var strNew = str.lowercased().addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+    
+    var count = 0
+    var startChar: Character
+    
+    
+    for char in (strNew?.characters)!{
+        
+        if char == " "{
+            count += 1
+        }
+        else{
+            startChar = char
+            break
+        }
+    }
+    
+    let strWithoutStartSpace  = String(str.characters.dropFirst(count))
+    let returnStr = strWithoutStartSpace.replacingOccurrences(of: " ", with: "+")
+    return returnStr
+}
+
+
+
+
 
 
 
